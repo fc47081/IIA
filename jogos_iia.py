@@ -183,8 +183,8 @@ class Game:
         """
 #        print('*******Jogar novo')
         estado = self.initial
-        if verbose :
-            self.display(estado)
+        #if verbose :
+            #self.display(estado)
 
         fim = False
         jogadores = (jogador1,jogador2)
@@ -193,8 +193,8 @@ class Game:
         while not fim :
             jogada = jogadores[ind_proximo](self,estado)
             estado = self.result(estado,jogada)
-            if verbose :
-                self.display(estado)
+            #if verbose :
+                #self.display(estado)
             fim = self.terminal_test(estado)
             ind_proximo = 1 - ind_proximo
                

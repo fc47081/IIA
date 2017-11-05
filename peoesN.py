@@ -1,4 +1,4 @@
-        #!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Sun Oct 29 20:58:50 2017
@@ -159,6 +159,7 @@ class JogoPeoes(Game) :
         return state.moves == [] or any([self.utility(state,x) != 0 for x in self.jogadores])
 
     def display(self, state):
+        print(state)
         linha = [chr(x) for x in range(ord('a'),self.cols + ord('a'))]
         board = state.board[1]
         print("Tabuleiro actual: ({})".format(state.board[0]))
@@ -180,7 +181,29 @@ class JogoPeoes(Game) :
             print("Próximo jogador:{}\n".format(state.to_move))
     
      
+def teste(n) :
+    if n == 1 :
+        g = JogoPeoes()
+        estado = g.initial
+    elif n == 2 :
+        estado =GameState(
+                to_move='brancas',
+                utility=0,
+                board=(0, 
+                       {'brancas': [(2, 4), (4,4), (5,5), (8, 3)], 
+                        'pretas': [(2, 5), (3, 6), (4, 5), (6, 5), (7, 2), (8, 6)]}),
+                moves=[('avança', (5, 5)), ('avança', (8, 3))])
+    elif n == 3 :
+        estado =GameState(
+                to_move='pretas',
+                utility=0,
+                board=(19, 
+                       {'brancas': [(1, 2), (2,3), (3,5), (4, 3), (5,2), (7, 3), (8,2), (4, 6)], 
+                        'pretas': [(1,6), (2,7), (3, 6), (4, 4), (5,6), (6,7)]}),
+                moves=[('avança', (1, 6)), ('avança', (2, 7)), 
+                       ('avança', (5, 6)), ('avança', (6, 7))])
+    else :
+        raise Exception("Estado não definido")
+    return estado
 
-    
 
-   
