@@ -87,15 +87,15 @@ def jogador_alfabeta_3(jogo,estado) :
 
 
 ###P1,P2,P3
-Parg = input()#"Coloque o estado que pretende: "
-if Parg.isdigit():
-    state = teste(int (Parg))
-else:
-    state = eval(Parg)
-pieces = input()#"pretas ou brancas: "
+#Parg = input()#"Coloque o estado que pretende: "
+#if Parg.isdigit():
+#    state = teste(int (Parg))
+#else:
+#    state = eval(Parg)
+#pieces = input()#"pretas ou brancas: "
 #print(f_aval_funcao1(state,pieces))#p1
 #print(f_aval_funcao2(state,pieces))#p2
-print(f_aval_funcao3(state,pieces))#p3
+#print(f_aval_funcao3(state,pieces))#p3
 
 #inputFuncao1 = input()
 #inputFuncao2= input()
