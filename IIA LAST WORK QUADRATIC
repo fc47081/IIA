@@ -1,0 +1,32 @@
+%:- use_module(library(clpfd)).
+% Dado um intervalo I (lista [Inf,Sup], em que Inf <= Sup) e os três
+% coeficientes (inteiros) A, B e C, N é o número de raízes e L a lista
+% das raízes encontradas.
+
+raizes(I,A,B,C,N,L):-
+
+% FIND SOLUTIONS %
+
+d = sqrt( (B**2) - (4 * A * C) ),
+root1 = (B + d) / (2.0 * A),
+root2 = (B - d) / (2.0 * A),
+
+% POR RAIZES NUMA LISTA AUXILIAR %
+append(root1, Lista , Lista),
+append(root2, Lista , Lista),
+
+L = aux(Lista,I,L),
+N = count(L,0),
+write(N),
+write(L).
+
+
+aux([X|Y], [Inf,Sup], L):-
+	(X > [Inf,_], X < [_,Sup], X \== 0 -> append([X],L ,L);append([],L ,L)),		
+	(Y > [Inf,_], Y < [_,Sup], Y \== 0 -> append([Y],L ,L);append([],L ,L)).
+
+	
+count([],0).
+count([_|Tail], N) :- 
+	count(Tail, N1), 
+	N is N1 + 1 .
