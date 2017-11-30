@@ -1,32 +1,23 @@
-%:- use_module(library(clpfd)).
-% Dado um intervalo I (lista [Inf,Sup], em que Inf <= Sup) e os três
-% coeficientes (inteiros) A, B e C, N é o número de raízes e L a lista
-% das raízes encontradas.
+:- use_module(library(clpfd)).
 
-raizes(I,A,B,C,N,L):-
+%P1
+raizes([Inf,Sup],A,B,C,N,L) :-
+Value in (Inf) .. (Sup),
+findall(Value,(indomain(Value),(A*(Value^2)) + B*Value + C #= 0),L),
+length(L,N).
 
-% FIND SOLUTIONS %
-
-d = sqrt( (B**2) - (4 * A * C) ),
-root1 = (B + d) / (2.0 * A),
-root2 = (B - d) / (2.0 * A),
-
-% POR RAIZES NUMA LISTA AUXILIAR %
-append(root1, Lista , Lista),
-append(root2, Lista , Lista),
-
-L = aux(Lista,I,L),
-N = count(L,0),
-write(N),
-write(L).
-
-
-aux([X|Y], [Inf,Sup], L):-
-	(X > [Inf,_], X < [_,Sup], X \== 0 -> append([X],L ,L);append([],L ,L)),		
-	(Y > [Inf,_], Y < [_,Sup], Y \== 0 -> append([Y],L ,L);append([],L ,L)).
-
-	
-count([],0).
-count([_|Tail], N) :- 
-	count(Tail, N1), 
-	N is N1 + 1 .
+%P2
+resolve_qm(P,[A,B,C,D,E,F,G,H,I],Soma):-
+    Matriz =  [A,B,C,D,E,F,G,H,I],
+    Sup #= P + 9,
+    Matriz ins P .. Sup,
+    A+B+C #=Soma,
+    D+E+F #=Soma,
+    G+H+I #=Soma,
+    A+D+G #=Soma,
+    B+E+H #=Soma,
+    C+F+I #=Soma,
+    A+E+I #=Soma,
+    C+E+G #=Soma,
+    all_different([A,B,C,D,E,F,G,H,I]),
+    label(Matriz).
